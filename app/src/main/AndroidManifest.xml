@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.pencatatantransaksi">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:name=".Contoller.AppController"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_brm"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/ic_brm"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".Master.Harga"></activity>
+        <activity android:name=".Laporan.GrafikPenjualan" />
+        <activity android:name=".Master.InputHarga" />
+        <activity android:name=".SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Laporan.LaporanKeuangan" />
+        <activity android:name=".Laporan.LaporanBarangKeluar" />
+        <activity android:name=".Laporan.LaporanBarangMasuk" />
+        <activity android:name=".Laporan.LaporanBarang" />
+        <activity android:name=".Transaksi.Pengeluaran" />
+        <activity android:name=".Transaksi.Pemasukan" />
+        <activity android:name=".Transaksi.BarangKeluar" />
+        <activity android:name=".Transaksi.BarangMasuk" />
+        <activity android:name=".Master.Stok" />
+        <activity android:name=".Master.Satuan" />
+        <activity android:name=".Master.Kategori" />
+        <activity android:name=".Master.Barang" />
+        <activity android:name=".MenuActivity" />
+    </application>
+
+</manifest>

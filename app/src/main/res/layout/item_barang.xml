@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginLeft="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/colorPrimaryDark"
+    app:cardCornerRadius="20dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/kat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="Kategori : "
+                android:textColor="@color/colorWhite"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/nama_kategori"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/kat"
+                android:gravity="center_vertical"
+                android:text="Pewangi"
+                android:textColor="@color/colorWhite"
+                android:textSize="16sp" />
+
+
+            <TextView
+                android:id="@+id/nama_varian"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/nama_kategori"
+                android:gravity="center_vertical"
+                android:text="MELATI"
+                android:textColor="@color/colorWhite"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/st"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/nama_varian"
+                android:gravity="center_vertical"
+                android:text="Stok : "
+                android:textColor="@color/colorWhite"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/stok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/nama_varian"
+                android:layout_toRightOf="@id/st"
+                android:gravity="center_vertical"
+                android:text="12"
+                android:textColor="@color/colorWhite"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/nama_satuan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/nama_varian"
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@id/stok"
+                android:gravity="center_vertical"
+                android:text="Botol"
+                android:textColor="@color/colorWhite"
+                android:textSize="16sp" />
+
+<!--            <TextView-->
+<!--                android:id="@+id/daftar_harga"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@id/nama_satuan"-->
+<!--                android:text="Daftar Harga :"-->
+<!--                android:textColor="@color/colorWhite" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/harga_1pcs"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@id/daftar_harga"-->
+<!--                android:text="1. Harga 1pcs :"-->
+<!--                android:textColor="@color/colorWhite" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/harga_barang_1pcs"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@id/daftar_harga"-->
+<!--                android:layout_toRightOf="@id/harga_1pcs"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:layout_marginLeft="4dp"-->
+<!--                android:text="12.000"-->
+<!--                android:textColor="@color/colorWhite"/>-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/harga_10pcs"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@id/harga_1pcs"-->
+<!--                android:text="2. Harga 10pcs :"-->
+<!--                android:textColor="@color/colorWhite" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/harga_barang_10pcs"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@id/harga_1pcs"-->
+<!--                android:layout_toRightOf="@id/harga_10pcs"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:layout_marginLeft="4dp"-->
+<!--                android:text="12.000"-->
+<!--                android:textColor="@color/colorWhite"/>-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/harga_50pcs"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@id/harga_10pcs"-->
+<!--                android:text="3. Harga 50pcs :"-->
+<!--                android:textColor="@color/colorWhite" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/harga_barang_50pcs"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@id/harga_10pcs"-->
+<!--                android:layout_toRightOf="@id/harga_50pcs"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:layout_marginLeft="4dp"-->
+<!--                android:text="12.000"-->
+<!--                android:textColor="@color/colorWhite"/>-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/harga_100pcs"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@id/harga_50pcs"-->
+<!--                android:text="4. Harga 100pcs :"-->
+<!--                android:textColor="@color/colorWhite" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/harga_barang_100pcs"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@id/harga_50pcs"-->
+<!--                android:layout_toRightOf="@id/harga_100pcs"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:layout_marginLeft="4dp"-->
+<!--                android:text="12.000"-->
+<!--                android:textColor="@color/colorWhite"/>-->
+        </RelativeLayout>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

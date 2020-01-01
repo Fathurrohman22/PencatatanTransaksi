@@ -1,0 +1,545 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container_cari"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#EEEEEE"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Laporan.LaporanFragment">
+
+<!--    <ImageView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:scaleType="fitXY" />-->
+
+<!--    <RelativeLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="150dp">-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical"-->
+<!--            android:layout_centerHorizontal="true">-->
+
+<!--            <ImageView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="4dp"-->
+<!--                android:src="@drawable/ic_laundry"-->
+<!--                android:layout_gravity="center_horizontal"/>-->
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_alignParentTop="true"-->
+<!--                android:layout_centerInParent="true"-->
+<!--                android:layout_marginTop="4dp"-->
+<!--                android:padding="8dp"-->
+<!--                android:text="MSL Purbalingga"-->
+<!--                android:textStyle="bold"-->
+<!--                android:textColor="@color/colorBlack"-->
+<!--                android:textSize="16sp"/>-->
+<!--        </LinearLayout>-->
+
+<!--        <com.scwang.wave.MultiWaveHeader-->
+<!--            android:id="@+id/waveHeader"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="60dp"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:scaleY="-1"-->
+<!--            app:mwhCloseColor="@color/colorWhite"-->
+<!--            app:mwhColorAlpha="0.6"-->
+<!--            app:mwhGradientAngle="90"-->
+<!--            app:mwhProgress="1"-->
+<!--            app:mwhStartColor="@color/colorWhite"-->
+<!--            app:mwhVelocity="1"-->
+<!--            app:mwhWaveHeight="27dp"-->
+<!--            app:mwhWaves="MultiWave" />-->
+<!--    </RelativeLayout>-->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginRight="16dp"
+        android:orientation="vertical">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/card"
+        android:layout_marginBottom="15dp">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/laporanBarang_card"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="1dp"
+                android:layout_weight="1"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="3dp"
+                tools:ignore="RtlHardcoded">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="43dp"
+                        android:layout_height="43dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/circle"
+                        android:gravity="center">
+
+                        <View
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:background="@drawable/ic_cart"
+                            android:backgroundTint="@color/colorWhite" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:text="Laporan Barang"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </TableRow>
+
+<!--        <TableRow-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="1">-->
+
+<!--            <androidx.cardview.widget.CardView-->
+<!--                android:id="@+id/laporanBrgMasuk_card"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="100dp"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                android:layout_marginLeft="15dp"-->
+<!--                android:layout_marginRight="15dp"-->
+<!--                android:layout_marginBottom="1dp"-->
+<!--                android:layout_weight="1"-->
+<!--                app:cardCornerRadius="16dp"-->
+<!--                app:cardElevation="3dp"-->
+<!--                tools:ignore="RtlHardcoded">-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:orientation="vertical">-->
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="43dp"-->
+<!--                        android:layout_height="43dp"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:background="@drawable/circle"-->
+<!--                        android:gravity="center">-->
+
+<!--                        <View-->
+<!--                            android:layout_width="30dp"-->
+<!--                            android:layout_height="30dp"-->
+<!--                            android:background="@drawable/ic_month_with_increasing_incomes_calendar_page"-->
+<!--                            android:backgroundTint="@color/colorWhite" />-->
+<!--                    </LinearLayout>-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="5dp"-->
+<!--                        android:gravity="center"-->
+<!--                        android:text="Laporan Barang Masuk"-->
+<!--                        android:textStyle="bold" />-->
+<!--                </LinearLayout>-->
+<!--            </androidx.cardview.widget.CardView>-->
+<!--        </TableRow>-->
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/laporanBrgKeluar_card"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="1dp"
+                android:layout_weight="1"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="3dp"
+                tools:ignore="RtlHardcoded">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="43dp"
+                        android:layout_height="43dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/circle"
+                        android:gravity="center">
+
+                        <View
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:background="@drawable/ic_dollar_analysis_bars_chart"
+                            android:backgroundTint="@color/colorWhite" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:text="Laporan Pesanan"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/laporanKeuangan_card"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="1dp"
+                android:layout_weight="1"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="3dp"
+                tools:ignore="RtlHardcoded">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="43dp"
+                        android:layout_height="43dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/circle"
+                        android:gravity="center">
+
+                        <View
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:background="@drawable/ic_financial_graphic_of_stocks_on_tablet_screen"
+                            android:backgroundTint="@color/colorWhite" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:text="Laporan Keuangan"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/laporanGrafik_card"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="1dp"
+                android:layout_weight="1"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="3dp"
+                tools:ignore="RtlHardcoded">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="43dp"
+                        android:layout_height="43dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/circle"
+                        android:gravity="center">
+
+                        <View
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:background="@drawable/ic_analytics"
+                            android:backgroundTint="@color/colorWhite" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:text="Grafik Penjualan"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </TableRow>
+    </TableLayout>
+    </LinearLayout>
+    </ScrollView>
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="114dp"-->
+<!--        android:layout_marginRight="16dp"-->
+<!--        android:layout_marginLeft="16dp"-->
+<!--        android:orientation="vertical">-->
+
+<!--        &lt;!&ndash;        <ImageView&ndash;&gt;-->
+<!--        &lt;!&ndash;            android:layout_width="100dp"&ndash;&gt;-->
+<!--        &lt;!&ndash;            android:layout_height="100dp"&ndash;&gt;-->
+<!--        &lt;!&ndash;            android:src="@drawable/ic_logo3"&ndash;&gt;-->
+<!--        &lt;!&ndash;            android:layout_gravity="center"&ndash;&gt;-->
+<!--        &lt;!&ndash;            android:padding="8dp" />&ndash;&gt;-->
+
+<!--        &lt;!&ndash;        <TextView&ndash;&gt;-->
+<!--        &lt;!&ndash;            android:layout_width="wrap_content"&ndash;&gt;-->
+<!--        &lt;!&ndash;            android:layout_height="wrap_content"&ndash;&gt;-->
+<!--        &lt;!&ndash;            android:layout_gravity="center_horizontal"&ndash;&gt;-->
+<!--        &lt;!&ndash;            android:text="Go Barang Bukti dan Tilang"&ndash;&gt;-->
+<!--        &lt;!&ndash;            android:textColor="@color/colorBlack"&ndash;&gt;-->
+<!--        &lt;!&ndash;            android:textStyle="bold" />&ndash;&gt;-->
+
+<!--        &lt;!&ndash;        <TextView&ndash;&gt;-->
+<!--        &lt;!&ndash;            android:layout_width="wrap_content"&ndash;&gt;-->
+<!--        &lt;!&ndash;            android:layout_height="wrap_content"&ndash;&gt;-->
+<!--        &lt;!&ndash;            android:layout_gravity="center_horizontal"&ndash;&gt;-->
+<!--        &lt;!&ndash;            android:layout_marginTop="4sp"&ndash;&gt;-->
+<!--        &lt;!&ndash;            android:textStyle="bold"&ndash;&gt;-->
+<!--        &lt;!&ndash;            android:text="Supported by PT. POS Indonesia"&ndash;&gt;-->
+<!--        &lt;!&ndash;            android:textColor="@color/colorBlack" />&ndash;&gt;-->
+
+
+<!--        <LinearLayout-->
+<!--            android:layout_marginTop="32dp"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:gravity="center">-->
+<!--            &lt;!&ndash; Column 2 &ndash;&gt;-->
+<!--            <androidx.cardview.widget.CardView-->
+<!--                android:id="@+id/laporanBarang_card"-->
+<!--                android:layout_width="130dp"-->
+<!--                android:layout_height="130dp"-->
+<!--                android:layout_rowWeight="1"-->
+<!--                android:layout_columnWeight="1"-->
+<!--                android:layout_marginLeft="16dp"-->
+<!--                android:layout_marginRight="16dp"-->
+<!--                android:layout_marginBottom="16dp"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                app:cardCornerRadius="32dp"-->
+<!--                app:cardElevation="32dp">-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center_horizontal|center_vertical"-->
+<!--                    android:layout_margin="16dp"-->
+<!--                    android:orientation="vertical">-->
+
+<!--                    <ImageView-->
+<!--                        android:layout_width="50dp"-->
+<!--                        android:layout_height="50dp"-->
+<!--                        android:layout_gravity="center_horizontal"-->
+<!--                        android:src="@drawable/ic_cart"/>-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Laporan Barang"-->
+<!--                        android:layout_gravity="center_horizontal"-->
+<!--                        android:textAlignment="center"-->
+<!--                        android:textColor="@android:color/black"-->
+<!--                        android:textSize="12sp"-->
+<!--                        android:textStyle="bold" />-->
+
+<!--                </LinearLayout>-->
+
+<!--            </androidx.cardview.widget.CardView>-->
+
+<!--            <androidx.cardview.widget.CardView-->
+<!--                android:id="@+id/laporanBrgMasuk_card"-->
+<!--                android:layout_width="130dp"-->
+<!--                android:layout_height="130dp"-->
+<!--                android:layout_rowWeight="1"-->
+<!--                android:layout_columnWeight="1"-->
+<!--                android:layout_marginLeft="16dp"-->
+<!--                android:layout_marginRight="16dp"-->
+<!--                android:layout_marginBottom="16dp"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                app:cardCornerRadius="32dp"-->
+<!--                app:cardElevation="32dp">-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center_horizontal|center_vertical"-->
+<!--                    android:layout_margin="16dp"-->
+<!--                    android:orientation="vertical">-->
+
+<!--                    <ImageView-->
+<!--                        android:layout_width="50dp"-->
+<!--                        android:layout_height="50dp"-->
+<!--                        android:layout_gravity="center_horizontal"-->
+<!--                        android:src="@drawable/ic_month_with_increasing_incomes_calendar_page"/>-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Laporan Barang Masuk"-->
+<!--                        android:textAlignment="center"-->
+<!--                        android:layout_gravity="center_horizontal"-->
+<!--                        android:textColor="@android:color/black"-->
+<!--                        android:textSize="12sp"-->
+<!--                        android:textStyle="bold" />-->
+
+<!--                </LinearLayout>-->
+
+<!--            </androidx.cardview.widget.CardView>-->
+
+<!--        </LinearLayout>-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:gravity="center">-->
+<!--            &lt;!&ndash; Column 2 &ndash;&gt;-->
+<!--            <androidx.cardview.widget.CardView-->
+<!--                android:id="@+id/laporanBrgKeluar_card"-->
+<!--                android:layout_width="130dp"-->
+<!--                android:layout_height="130dp"-->
+<!--                android:layout_rowWeight="1"-->
+<!--                android:layout_columnWeight="1"-->
+<!--                android:layout_marginLeft="16dp"-->
+<!--                android:layout_marginRight="16dp"-->
+<!--                android:layout_marginBottom="16dp"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                app:cardCornerRadius="32dp"-->
+<!--                app:cardElevation="32dp">-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center_horizontal|center_vertical"-->
+<!--                    android:layout_margin="16dp"-->
+<!--                    android:orientation="vertical">-->
+
+<!--                    <ImageView-->
+<!--                        android:layout_width="50dp"-->
+<!--                        android:layout_height="50dp"-->
+<!--                        android:layout_gravity="center_horizontal"-->
+<!--                        android:src="@drawable/ic_dollar_analysis_bars_chart"/>-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Laporan Barang Keluar"-->
+<!--                        android:textAlignment="center"-->
+<!--                        android:layout_gravity="center_horizontal"-->
+<!--                        android:textColor="@android:color/black"-->
+<!--                        android:textSize="12sp"-->
+<!--                        android:textStyle="bold" />-->
+
+<!--                </LinearLayout>-->
+
+<!--            </androidx.cardview.widget.CardView>-->
+
+<!--            <androidx.cardview.widget.CardView-->
+<!--                android:id="@+id/laporanKeuangan_card"-->
+<!--                android:layout_width="130dp"-->
+<!--                android:layout_height="130dp"-->
+<!--                android:layout_rowWeight="1"-->
+<!--                android:layout_columnWeight="1"-->
+<!--                android:layout_marginLeft="16dp"-->
+<!--                android:layout_marginRight="16dp"-->
+<!--                android:layout_marginBottom="16dp"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                app:cardCornerRadius="32dp"-->
+<!--                app:cardElevation="32dp">-->
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center_horizontal|center_vertical"-->
+<!--                    android:layout_margin="16dp"-->
+<!--                    android:orientation="vertical">-->
+
+<!--                    <ImageView-->
+<!--                        android:layout_width="50dp"-->
+<!--                        android:layout_height="50dp"-->
+<!--                        android:layout_gravity="center_horizontal"-->
+<!--                        android:src="@drawable/ic_financial_graphic_of_stocks_on_tablet_screen"/>-->
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Laporan Keuangan"-->
+<!--                        android:textAlignment="center"-->
+<!--                        android:layout_gravity="center_horizontal"-->
+<!--                        android:textColor="@android:color/black"-->
+<!--                        android:textSize="12sp"-->
+<!--                        android:textStyle="bold" />-->
+
+<!--                </LinearLayout>-->
+
+<!--            </androidx.cardview.widget.CardView>-->
+
+<!--        </LinearLayout>-->
+
+
+<!--    </LinearLayout>-->
+
+</FrameLayout>
+
+
+
+
+

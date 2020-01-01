@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="Master"
+        android:id="@+id/bottomNavigationMaster"
+        android:icon="@drawable/ic_master"/>
+    <item android:title="Transaksi"
+        android:id="@+id/bottomNavigationTransaksi"
+        android:icon="@drawable/ic_transaksi"/>
+    <item android:title="Laporan"
+        android:id="@+id/bottomNavigationLaporan"
+        android:icon="@drawable/ic_laporan"/>
+    <item android:title="Pengaturan"
+        android:id="@+id/bottomNavigationPengaturan"
+        android:icon="@drawable/ic_pengaturan"/>
+</menu>
