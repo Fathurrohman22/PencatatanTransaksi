@@ -135,7 +135,7 @@ public class Harga extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         Log.e("Response Harga", response);
-                        Toast.makeText(Harga.this, getSatuan() + getKategori(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Harga.this, "Input Berhasil", Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(Harga.this, InputHarga.class);
                         startActivity(i);
 //                        i.putExtra("nama_kategori", kategori);
