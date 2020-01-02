@@ -78,7 +78,6 @@ public class BarangMasuk extends AppCompatActivity {
     private ArrayList<ModelBarang> listBarang = new ArrayList<ModelBarang>();
     private ArrayList<ModelBarangMasuk> listBarangMasuk = new ArrayList<ModelBarangMasuk>();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -326,7 +325,6 @@ public class BarangMasuk extends AppCompatActivity {
         //adding our stringrequest to queue
         Volley.newRequestQueue(this).add(stringRequest);
     }
-
 
 //    private void showDateDialog() {
 //        /**

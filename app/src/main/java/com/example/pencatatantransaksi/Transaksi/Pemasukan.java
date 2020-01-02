@@ -29,8 +29,6 @@ import java.util.Objects;
 public class Pemasukan extends AppCompatActivity {
 
     private EditText txtPelanggan, txtDate, txtJumlah, txtKeterangan;
-    private DatePickerDialog datePickerDialog;
-    private SimpleDateFormat dateFormat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,34 +62,16 @@ public class Pemasukan extends AppCompatActivity {
 
     public void getDate(View view) {
         Calendar newCalendar = Calendar.getInstance();
-
-        /**
-         * Initiate DatePicker dialog
-         */
-        datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                /**
-                 * Method ini dipanggil saat kita selesai memilih tanggal di DatePicker
-                 */
-
-                /**
-                 * Set Calendar untuk menampung tanggal yang dipilih
-                 */
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year, monthOfYear, dayOfMonth);
-                dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
-                /**
-                 * Update TextView dengan tanggal yang kita pilih
-                 */
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
                 txtDate.setText(dateFormat.format(newDate.getTime()));
             }
 
         }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
-
-        /**
-         * Tampilkan DatePicker dialog
-         */
         datePickerDialog.show();
     }
 

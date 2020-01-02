@@ -12,10 +12,11 @@
         android:roundIcon="@drawable/ic_brm"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Helper.CariPelanggan.TambahPelangganActivity"></activity>
         <activity
             android:name=".Helper.CariPelanggan.CariPelangganActivity"
             android:label="@string/title_activity_cari_pelanggan"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Master.Harga" />
         <activity android:name=".Laporan.GrafikPenjualan" />
         <activity android:name=".Master.InputHarga" />

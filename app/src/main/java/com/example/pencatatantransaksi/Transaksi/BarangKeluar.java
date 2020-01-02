@@ -264,36 +264,6 @@ public class BarangKeluar extends AppCompatActivity {
                 });
     }
 
-    private void simpanBarangKeluar(final String nama_pelanggan, final String satuan, final String kategori, final String varian, final String jumlah, final String tanggalbrgkeluar) {
-        listBarangKeluar.clear();
-
-        Map<String, String> params = new HashMap<String, String>();
-        params.put("nama_pelanggan", nama_pelanggan);
-        params.put("tgl_barang_keluar", tanggalbrgkeluar);
-        params.put("nama_kategori", kategori);
-        params.put("nama_satuan", satuan);
-        params.put("nama_varian", varian);
-        params.put("jumlah", jumlah);
-
-        AndroidNetworking.post(API.URL_TAMBAH_BARANGKELUAR)
-                .addBodyParameter(params)
-                .setPriority(Priority.MEDIUM)
-                .build()
-                .getAsString(new StringRequestListener() {
-                    @Override
-                    public void onResponse(String response) {
-                        Log.e("Response", response);
-                        Toast.makeText(BarangKeluar.this, response, Toast.LENGTH_SHORT).show();
-                        finish();
-                    }
-
-                    @Override
-                    public void onError(ANError anError) {
-                        Toast.makeText(BarangKeluar.this, "error", Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
-
     private void showDateDialog() {
         Calendar newCalendar = Calendar.getInstance();
 
@@ -414,5 +384,35 @@ public class BarangKeluar extends AppCompatActivity {
 
         //adding our stringrequest to queue
         Volley.newRequestQueue(this).add(stringRequest);
+    }
+
+    private void simpanBarangKeluar(final String nama_pelanggan, final String satuan, final String kategori, final String varian, final String jumlah, final String tanggalbrgkeluar) {
+        listBarangKeluar.clear();
+
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("nama_pelanggan", nama_pelanggan);
+        params.put("tgl_barang_keluar", tanggalbrgkeluar);
+        params.put("nama_kategori", kategori);
+        params.put("nama_satuan", satuan);
+        params.put("nama_varian", varian);
+        params.put("jumlah", jumlah);
+
+        AndroidNetworking.post(API.URL_TAMBAH_BARANGKELUAR)
+                .addBodyParameter(params)
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsString(new StringRequestListener() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.e("Response", response);
+                        Toast.makeText(BarangKeluar.this, response, Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        Toast.makeText(BarangKeluar.this, "error", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }

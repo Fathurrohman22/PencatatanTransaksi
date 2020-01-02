@@ -101,7 +101,7 @@
                         android:textSize="10sp" />
 
                     <EditText
-                        android:id="@+id/etTglDariLapBarangMasuk"
+                        android:id="@+id/txtNama"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingTop="8dp"

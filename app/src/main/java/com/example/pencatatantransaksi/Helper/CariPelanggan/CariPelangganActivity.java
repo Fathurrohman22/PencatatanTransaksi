@@ -9,6 +9,7 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.StringRequestListener;
 import com.example.pencatatantransaksi.Contoller.API;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.pencatatantransaksi.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -42,7 +44,21 @@ public class CariPelangganActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerview);
         RecyclerView.LayoutManager ly = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(ly);
+        findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivityForResult(new Intent(CariPelangganActivity.this, TambahPelangganActivity.class), TambahPelangganActivity.KEY);
+            }
+        });
         getPelanggan();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode==TambahPelangganActivity.KEY){
+            getPelanggan();
+        }
     }
 
     private void getPelanggan(){

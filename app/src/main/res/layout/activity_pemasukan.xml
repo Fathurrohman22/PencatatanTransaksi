@@ -10,7 +10,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorWhite"
+        android:background="@color/colorPrimary"
         android:orientation="horizontal">
 
         <ImageView
@@ -21,15 +21,16 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:clickable="true"
             android:focusable="true"
-            android:padding="8dp"
             android:onClick="finish"
-            android:src="@drawable/ic_close_black_24dp" />
+            android:padding="8dp"
+            android:src="@drawable/ic_close_black_24dp"
+            android:tint="@color/colorWhite" />
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="8dp"
-            android:src="@drawable/ic_brm"/>
+            android:src="@drawable/ic_brm" />
 
     </RelativeLayout>
 
