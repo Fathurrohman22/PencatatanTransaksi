@@ -131,16 +131,16 @@
                     android:textColor="@color/colorBlack"
                     android:textSize="10sp" />
 
-                <EditText
+                <TextView
                     android:id="@+id/etJmlBarang"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="cth = 100000"
-                    android:inputType="number"
+                    android:layout_marginLeft="20dp"
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
-                    android:textColor="@color/colorBlack"
-                    android:textSize="14sp" />
+                    android:text="Rp0"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="18sp" />
 
                 <TextView
                     android:layout_width="match_parent"

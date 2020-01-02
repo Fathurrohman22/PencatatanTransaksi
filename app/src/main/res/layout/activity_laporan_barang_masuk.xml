@@ -101,7 +101,7 @@
                         android:textSize="10sp" />
 
                     <EditText
-                        android:id="@+id/txtNama"
+                        android:id="@+id/etTglMasuk"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingTop="8dp"
@@ -118,7 +118,7 @@
                         android:textSize="10sp" />
 
                     <EditText
-                        android:id="@+id/etTglSampaiLapBarangMasuk"
+                        android:id="@+id/etTglSampai"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingTop="8dp"

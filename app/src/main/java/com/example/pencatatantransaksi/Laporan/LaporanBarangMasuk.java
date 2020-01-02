@@ -25,8 +25,8 @@ public class LaporanBarangMasuk extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_laporan_barang_masuk);
 
-        txtTglMasuk = findViewById(R.id.etTglDariLapBarangMasuk);
-        txtTglKeluar = findViewById(R.id.etTglSampaiLapBarangMasuk);
+        txtTglMasuk = findViewById(R.id.etTglMasuk);
+        txtTglKeluar = findViewById(R.id.etTglSampai);
 
         silang = findViewById(R.id.btnClose);
         silang.setOnClickListener(new View.OnClickListener() {

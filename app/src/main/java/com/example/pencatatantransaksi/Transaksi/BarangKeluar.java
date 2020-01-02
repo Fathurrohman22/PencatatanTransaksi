@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -41,6 +42,7 @@ import com.example.pencatatantransaksi.Master.Barang;
 import com.example.pencatatantransaksi.Master.Stok;
 import com.example.pencatatantransaksi.Model.ModelBarang;
 import com.example.pencatatantransaksi.Model.ModelBarangKeluar;
+import com.example.pencatatantransaksi.Model.ModelHarga;
 import com.example.pencatatantransaksi.Model.ModelKategori;
 import com.example.pencatatantransaksi.Model.ModelSatuan;
 import com.example.pencatatantransaksi.R;
@@ -99,7 +101,7 @@ public class BarangKeluar extends AppCompatActivity {
     String varian;
 
     private EditText namapelanggan, tanggalbrgkeluar;
-    private TextView tvTotal;
+    private TextView tvTotal, tvTotalHarga;
     private RecyclerView rvVarian;
     private Button simpan;
     private DatePickerDialog datePickerDialog;
@@ -112,6 +114,7 @@ public class BarangKeluar extends AppCompatActivity {
     private ArrayList<ModelKategori> listKategori = new ArrayList<ModelKategori>();
     private ArrayList<ModelBarang> listBarang = new ArrayList<>();
     private ArrayList<ModelBarangKeluar> listBarangKeluar = new ArrayList<ModelBarangKeluar>();
+    private ModelHarga modelHarga;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,12 +125,12 @@ public class BarangKeluar extends AppCompatActivity {
         namapelanggan = findViewById(R.id.etNamaPel);
         rvVarian = findViewById(R.id.rvVarian);
         rvVarian.setLayoutManager(new LinearLayoutManager(this));
-        tampilVarian();
         dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
         tanggalbrgkeluar = findViewById(R.id.etTglJual);
         simpan = findViewById(R.id.tambah_barang);
         spinnerKategori = findViewById(R.id.my_spinnerKategori);
         spinnerSatuan = findViewById(R.id.my_spinnerSatuan);
+        tvTotalHarga = findViewById(R.id.tvTotalHarga);
 
         namapelanggan.setFocusable(false);
         namapelanggan.setOnClickListener(new View.OnClickListener() {
@@ -158,6 +161,7 @@ public class BarangKeluar extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 setSatuan(listSatuan.get(position).getNama_satuan());
+                getHarga();
             }
 
             @Override
@@ -189,24 +193,54 @@ public class BarangKeluar extends AppCompatActivity {
         simpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                simpanBarangKeluar(getKategori(), getSatuan(), getVarian(), namapelanggan.getText().toString(), tvTotal.getText().toString(), tanggalbrgkeluar.getText().toString());
+                simpanBarangKeluar(namapelanggan.getText().toString(), getSatuan(), getKategori(), getVarian(), tvTotal.getText().toString(), tanggalbrgkeluar.getText().toString(), tvTotalHarga.getText().toString());
             }
         });
 
     }
 
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == CariPelangganActivity.KEY_DATA_PELANGGAN){
+        if (resultCode == CariPelangganActivity.KEY_DATA_PELANGGAN) {
             if (data != null) {
                 String rest = Objects.requireNonNull(data.getStringExtra(CariPelangganActivity.GSON_DATA_PELANGGAN)).toString();
                 PelangganModel pm = new Gson().fromJson(rest, PelangganModel.class);
                 namapelanggan.setText(pm.getPlgNama());
             }
         }
+    }
+
+    private void getHarga() {
+        AndroidNetworking.get(API.URL_DETAIL_HARGA)
+                .addQueryParameter("kategori", getKategori())
+                .addQueryParameter("satuan", getSatuan())
+                .setPriority(Priority.LOW)
+                .build()
+                .getAsString(new StringRequestListener() {
+                    @Override
+                    public void onResponse(String response) {
+                        if (!response.trim().equals("null")) {
+                            Toast.makeText(BarangKeluar.this, "Harga tersedia", Toast.LENGTH_SHORT).show();
+                            try {
+                                JSONObject jsonObject = new JSONObject(response.trim());
+                                modelHarga = new Gson().fromJson(jsonObject.getString("value"), ModelHarga.class);
+                                Log.i("BK229", modelHarga.toString());
+                                tampilVarian();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                        } else {
+                            Toast.makeText(BarangKeluar.this, "Harga tidak tersedia", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        Toast.makeText(BarangKeluar.this, "error harga", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     private void tampilVarian() {
@@ -240,7 +274,7 @@ public class BarangKeluar extends AppCompatActivity {
                             e.printStackTrace();
                         }
 
-                        adapterVarian = new AdapterVarian(BarangKeluar.this, listBarang, tvTotal);
+                        adapterVarian = new AdapterVarian(BarangKeluar.this, listBarang, tvTotal, tvTotalHarga, modelHarga);
                         adapterVarian.notifyDataSetChanged();
                         rvVarian.setAdapter(adapterVarian);
                         adapterVarian.setOnItemClickListener(new AdapterVarian.ClickListener() {
@@ -386,24 +420,24 @@ public class BarangKeluar extends AppCompatActivity {
         Volley.newRequestQueue(this).add(stringRequest);
     }
 
-    private void simpanBarangKeluar(final String nama_pelanggan, final String satuan, final String kategori, final String varian, final String jumlah, final String tanggalbrgkeluar) {
+    private void simpanBarangKeluar(final String nama_pelanggan, final String satuan, final String kategori, final String varian, final String jumlah, final String tanggalbrgkeluar, final String harga_total) {
         listBarangKeluar.clear();
-
-        Map<String, String> params = new HashMap<String, String>();
-        params.put("nama_pelanggan", nama_pelanggan);
-        params.put("tgl_barang_keluar", tanggalbrgkeluar);
-        params.put("nama_kategori", kategori);
-        params.put("nama_satuan", satuan);
-        params.put("nama_varian", varian);
-        params.put("jumlah", jumlah);
-
+        //`nama_pelanggan`, `tgl_barang_keluar`, `nama_kategori`, `nama_satuan`, `nama_varian`, `jumlah_brg_keluar`, `harga_total`
+        final ProgressDialog progressDialog = ProgressDialog.show(this, "Harap Tunggu", "menyimpan data");
         AndroidNetworking.post(API.URL_TAMBAH_BARANGKELUAR)
-                .addBodyParameter(params)
+                .addBodyParameter("nama_pelanggan", nama_pelanggan)
+                .addBodyParameter("tgl_barang_keluar", tanggalbrgkeluar)
+                .addBodyParameter("nama_kategori", kategori)
+                .addBodyParameter("nama_satuan", satuan)
+                .addBodyParameter("nama_varian", varian)
+                .addBodyParameter("jumlah_brg_keluar", jumlah)
+                .addBodyParameter("harga_total", harga_total)
                 .setPriority(Priority.MEDIUM)
                 .build()
                 .getAsString(new StringRequestListener() {
                     @Override
                     public void onResponse(String response) {
+                        progressDialog.cancel();
                         Log.e("Response", response);
                         Toast.makeText(BarangKeluar.this, response, Toast.LENGTH_SHORT).show();
                         finish();
@@ -411,6 +445,7 @@ public class BarangKeluar extends AppCompatActivity {
 
                     @Override
                     public void onError(ANError anError) {
+                        progressDialog.cancel();
                         Toast.makeText(BarangKeluar.this, "error", Toast.LENGTH_SHORT).show();
                     }
                 });

@@ -6,6 +6,7 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.icu.text.NumberFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,17 +16,15 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.Filterable;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Locale;
 
 import android.widget.Filter;
 import android.widget.TextView;
 
-import com.example.pencatatantransaksi.Helper.SeleksiBarangKeluarModel;
 import com.example.pencatatantransaksi.Model.ModelBarang;
+import com.example.pencatatantransaksi.Model.ModelHarga;
 import com.example.pencatatantransaksi.R;
-import com.example.pencatatantransaksi.Transaksi.BarangKeluar;
 
 public class AdapterVarian extends RecyclerView.Adapter<AdapterVarian.ViewHolder> implements Filterable {
 
@@ -35,14 +34,17 @@ public class AdapterVarian extends RecyclerView.Adapter<AdapterVarian.ViewHolder
     private ArrayList<ModelBarang> datasetFilter;
     private static ClickListener clickListener;
     private CustomFilter filter;
-    private TextView tvTotal;
+    private TextView tvTotal, tvTotalHarga;
     private int[] seleksi;
+    private ModelHarga modelHarga;
 
-    public AdapterVarian(Context context, ArrayList<ModelBarang> dataset, TextView tvTotal) {
+    public AdapterVarian(Context context, ArrayList<ModelBarang> dataset, TextView tvTotal, TextView tvTotalHarga, ModelHarga modelHarga) {
         this.context = context;
         this.dataset = dataset;
         this.tvTotal = tvTotal;
         this.datasetFilter = dataset;
+        this.tvTotalHarga = tvTotalHarga;
+        this.modelHarga = modelHarga;
         seleksi = new int[dataset.size()];
     }
 
@@ -64,6 +66,7 @@ public class AdapterVarian extends RecyclerView.Adapter<AdapterVarian.ViewHolder
     }
 
     private int total = 0;
+    private int hartot = 0;
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
@@ -71,7 +74,7 @@ public class AdapterVarian extends RecyclerView.Adapter<AdapterVarian.ViewHolder
         holder.btnMin.setEnabled(false);
         holder.btnPlus.setEnabled(false);
 
-        ModelBarang modelBarang = dataset.get(position);
+        final ModelBarang modelBarang = dataset.get(position);
         seleksi[position] = 0;
 
         //loading the image
@@ -89,8 +92,8 @@ public class AdapterVarian extends RecyclerView.Adapter<AdapterVarian.ViewHolder
                         @SuppressLint("SetTextI18n")
                         @Override
                         public void onClick(View v) {
-                            seleksi[position] = seleksi[position]+1;
-                            holder.tvJml.setText(""+seleksi[position]);
+                            seleksi[position] = seleksi[position] + 1;
+                            holder.tvJml.setText("" + seleksi[position]);
                             setTotal();
                         }
                     });
@@ -99,14 +102,14 @@ public class AdapterVarian extends RecyclerView.Adapter<AdapterVarian.ViewHolder
                         @SuppressLint("SetTextI18n")
                         @Override
                         public void onClick(View v) {
-                            seleksi[position] = seleksi[position]-1;
+                            seleksi[position] = seleksi[position] - 1;
                             if (seleksi[position] < 1) {
                                 seleksi[position] = 1;
                                 holder.btnMin.setEnabled(false);
-                            }else {
+                            } else {
                                 holder.btnMin.setEnabled(true);
                             }
-                            holder.tvJml.setText(""+seleksi[position]);
+                            holder.tvJml.setText("" + seleksi[position]);
                             setTotal();
                         }
                     });
@@ -114,7 +117,7 @@ public class AdapterVarian extends RecyclerView.Adapter<AdapterVarian.ViewHolder
                     holder.btnMin.setEnabled(false);
                     holder.btnPlus.setEnabled(false);
                     seleksi[position] = 0;
-                    holder.tvJml.setText(""+seleksi[position]);
+                    holder.tvJml.setText("" + seleksi[position]);
                     setTotal();
                 }
             }
@@ -127,7 +130,26 @@ public class AdapterVarian extends RecyclerView.Adapter<AdapterVarian.ViewHolder
         for (int i : seleksi) {
             total = total + i;
         }
-        tvTotal.setText(""+total);
+        tvTotal.setText("" + total);
+        setHarga(total);
+    }
+
+    @SuppressLint("SetTextI18n")
+    private void setHarga(int tot) {
+        int hitung = 0;
+        if (tot > 0 && tot < 10) {
+            hitung = tot * Integer.parseInt(modelHarga.getHarga1pcs().replace(".", "").trim());
+        } else if (tot >= 10 && tot < 50) {
+            hitung = tot * Integer.parseInt(modelHarga.getHarga10pcs().replace(".", "").trim());
+        } else if (tot >= 50 && tot < 100) {
+            hitung = tot * Integer.parseInt(modelHarga.getHarga50pcs().replace(".", "").trim());
+        } else if (tot >= 100) {
+            hitung = tot * Integer.parseInt(modelHarga.getHarga100pcs().replace(".", "").trim());
+        }
+
+        Locale localeID = new Locale("in", "ID");
+        NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeID);
+        tvTotalHarga.setText(formatRupiah.format((double) hitung));
     }
 
     @Override
