@@ -23,6 +23,7 @@ import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 import java.util.Objects;
 
 public class Pemasukan extends AppCompatActivity {
@@ -79,7 +80,7 @@ public class Pemasukan extends AppCompatActivity {
                  */
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year, monthOfYear, dayOfMonth);
-
+                dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
                 /**
                  * Update TextView dengan tanggal yang kita pilih
                  */

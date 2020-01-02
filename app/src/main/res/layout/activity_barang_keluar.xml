@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -96,47 +97,44 @@
                     android:orientation="vertical"
                     android:padding="16dp">
 
-                    <TextView
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Nama Pelanggan"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="10sp" />
+                        android:textColorHint="@color/colorAccent"
+                        app:hintTextAppearance="@style/HintTextStyle">
 
-                    <EditText
-                        android:id="@+id/etNamaPel"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="tap disini"
-                        android:inputType="textPersonName"
-                        android:paddingTop="8dp"
-                        android:paddingBottom="8dp"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="14sp" />
+                        <EditText
+                            android:id="@+id/etNamaPel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@android:color/transparent"
+                            android:focusable="false"
+                            android:hint="Nama Pelanggan"
+                            android:maxLines="1" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                    <TextView
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Tanggal Jual"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="10sp" />
+                        android:textColorHint="@color/colorAccent"
+                        app:hintTextAppearance="@style/HintTextStyle">
 
-                    <EditText
-                        android:id="@+id/etTglJual"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:focusable="false"
-                        android:focusableInTouchMode="false"
-                        android:hint="tap disini"
-                        android:paddingTop="8dp"
-                        android:paddingBottom="8dp"
-                        android:selectAllOnFocus="false"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="14sp" />
+                        <EditText
+                            android:id="@+id/etTglJual"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@android:color/transparent"
+                            android:focusable="false"
+                            android:hint="Tanggal Jual"
+                            android:maxLines="1" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
                         android:text="Kategori"
                         android:textColor="@color/colorBlack"
                         android:textSize="10sp" />
