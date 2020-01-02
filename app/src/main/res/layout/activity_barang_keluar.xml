@@ -31,9 +31,11 @@
 
     </RelativeLayout>
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:clipToPadding="true"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -76,8 +78,9 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginTop="16dp"
+                android:layout_weight="1"
                 android:background="@color/colorWhite"
                 android:orientation="vertical">
 
@@ -89,6 +92,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:orientation="vertical"
                     android:padding="16dp">
 
@@ -103,6 +107,7 @@
                         android:id="@+id/etNamaPel"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:hint="tap disini"
                         android:inputType="textPersonName"
                         android:paddingTop="8dp"
                         android:paddingBottom="8dp"
@@ -120,8 +125,12 @@
                         android:id="@+id/etTglJual"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:hint="tap disini"
                         android:paddingTop="8dp"
                         android:paddingBottom="8dp"
+                        android:selectAllOnFocus="false"
                         android:textColor="@color/colorBlack"
                         android:textSize="14sp" />
 
@@ -161,39 +170,34 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Jumlah"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="10sp" />
-
-                    <EditText
-                        android:id="@+id/etJmlBarang"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="cth = 12, 13"
-                        android:inputType="number"
-                        android:paddingTop="8dp"
-                        android:paddingBottom="8dp"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="14sp" />
-
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvTotal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="0"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
 
                     <Button
                         android:id="@+id/tambah_barang"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginRight="16dp"
-                        android:layout_marginBottom="16dp"
                         android:layout_weight="1"
                         android:backgroundTint="@color/colorPrimary"
                         android:text="Simpan"
@@ -227,5 +231,5 @@
                 <!--                </LinearLayout>-->
             </LinearLayout>
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

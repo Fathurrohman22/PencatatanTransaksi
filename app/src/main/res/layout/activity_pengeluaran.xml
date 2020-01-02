@@ -97,17 +97,20 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Saldo"
+                        android:textAlignment="viewEnd"
                         android:textColor="@color/colorBlack"
-                        android:textSize="10sp" />
+                        android:textSize="12sp" />
 
                     <TextView
-                        android:id="@+id/saldo"
+                        android:id="@+id/tvSaldo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
                         android:text="Rp 100.000"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="14sp" />
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -179,6 +182,7 @@
                         android:layout_marginBottom="16dp"
                         android:textColor="@color/colorWhite"
                         android:id="@+id/tambah_barang"
+                        android:onClick="Simpan"
                         android:backgroundTint="@color/colorPrimary"
                         android:text="Simpan"/>
 

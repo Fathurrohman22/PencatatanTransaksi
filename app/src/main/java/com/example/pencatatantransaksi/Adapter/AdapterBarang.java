@@ -10,16 +10,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.pencatatantransaksi.Helper.SeleksiBarangKeluarModel;
 import com.example.pencatatantransaksi.Model.ModelBarang;
 import com.example.pencatatantransaksi.Model.ModelKategori;
 import com.example.pencatatantransaksi.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterBarang extends RecyclerView.Adapter<AdapterBarang.ProductViewHolder> {
 
     private Context mCtx;
     private List<ModelBarang> modelBarangs;
+
 
     public AdapterBarang(Context mCtx, List<ModelBarang> modelBarangs) {
         this.mCtx = mCtx;

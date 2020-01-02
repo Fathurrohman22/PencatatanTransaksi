@@ -1,70 +1,208 @@
 package com.example.pencatatantransaksi.Adapter;
 
-import android.app.Activity;
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.CheckBox;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.pencatatantransaksi.Model.ModelBarang;
-import com.example.pencatatantransaksi.Model.ModelBarangKeluar;
-import com.example.pencatatantransaksi.Model.ModelSatuan;
-import com.example.pencatatantransaksi.R;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.Filterable;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
-import edu.counterview.CounterView;
+import android.widget.Filter;
+import android.widget.TextView;
 
-public class AdapterVarian extends RecyclerView.Adapter<AdapterVarian.ProductViewHolder> {
-    private Context mCtx;
-    private List<ModelBarang> modelBarangs;
+import com.example.pencatatantransaksi.Helper.SeleksiBarangKeluarModel;
+import com.example.pencatatantransaksi.Model.ModelBarang;
+import com.example.pencatatantransaksi.R;
+import com.example.pencatatantransaksi.Transaksi.BarangKeluar;
 
-    public AdapterVarian(Context activity, List<ModelBarang> item) {
-        this.mCtx = activity;
-        this.modelBarangs = item;
+public class AdapterVarian extends RecyclerView.Adapter<AdapterVarian.ViewHolder> implements Filterable {
+
+    private static final String TAG = AdapterVarian.class.getSimpleName();
+    private Context context;
+    private ArrayList<ModelBarang> dataset;
+    private ArrayList<ModelBarang> datasetFilter;
+    private static ClickListener clickListener;
+    private CustomFilter filter;
+    private TextView tvTotal;
+    private int[] seleksi;
+
+    public AdapterVarian(Context context, ArrayList<ModelBarang> dataset, TextView tvTotal) {
+        this.context = context;
+        this.dataset = dataset;
+        this.tvTotal = tvTotal;
+        this.datasetFilter = dataset;
+        seleksi = new int[dataset.size()];
+    }
+
+    public void setOnItemClickListener(ClickListener clickListener) {
+        AdapterVarian.clickListener = clickListener;
     }
 
     @NonNull
     @Override
-    public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(mCtx);
-        View view = inflater.inflate(R.layout.item_varian, null);
-        return new ProductViewHolder(view);
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_varian, parent, false);
+        return new ViewHolder(view);
     }
 
+    public interface ClickListener {
+        void onItemClick(int position, View view);
+
+        void onItemLongClick(int position, View view);
+    }
+
+    private int total = 0;
+
     @Override
-    public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
-        ModelBarang modelBarang = modelBarangs.get(position);
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
+
+        holder.btnMin.setEnabled(false);
+        holder.btnPlus.setEnabled(false);
+
+        ModelBarang modelBarang = dataset.get(position);
+        seleksi[position] = 0;
 
         //loading the image
         holder.option.setText(modelBarang.getVarian());
+        holder.option.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+
+                    holder.btnMin.setEnabled(true);
+                    holder.btnPlus.setEnabled(true);
+
+                    holder.btnPlus.setOnClickListener(new View.OnClickListener() {
+                        @SuppressLint("SetTextI18n")
+                        @Override
+                        public void onClick(View v) {
+                            seleksi[position] = seleksi[position]+1;
+                            holder.tvJml.setText(""+seleksi[position]);
+                            setTotal();
+                        }
+                    });
+
+                    holder.btnMin.setOnClickListener(new View.OnClickListener() {
+                        @SuppressLint("SetTextI18n")
+                        @Override
+                        public void onClick(View v) {
+                            seleksi[position] = seleksi[position]-1;
+                            if (seleksi[position] < 1) {
+                                seleksi[position] = 1;
+                                holder.btnMin.setEnabled(false);
+                            }else {
+                                holder.btnMin.setEnabled(true);
+                            }
+                            holder.tvJml.setText(""+seleksi[position]);
+                            setTotal();
+                        }
+                    });
+                } else {
+                    holder.btnMin.setEnabled(false);
+                    holder.btnPlus.setEnabled(false);
+                    seleksi[position] = 0;
+                    holder.tvJml.setText(""+seleksi[position]);
+                    setTotal();
+                }
+            }
+        });
     }
 
-
+    @SuppressLint("SetTextI18n")
+    private void setTotal() {
+        total = 0;
+        for (int i : seleksi) {
+            total = total + i;
+        }
+        tvTotal.setText(""+total);
+    }
 
     @Override
     public int getItemCount() {
-        return modelBarangs.size();
+        return dataset.size();
     }
 
-    class ProductViewHolder extends RecyclerView.ViewHolder {
+    public void clear() {
+        int size = this.dataset.size();
+        this.dataset.clear();
+        notifyItemRangeRemoved(0, size);
+    }
 
+    @Override
+    public Filter getFilter() {
+        if (filter == null) {
+            filter = new CustomFilter();
+        }
+        return filter;
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         CheckBox option;
-        CounterView jumlah;
+        Button btnPlus, btnMin;
+        TextView tvJml;
 
-        public ProductViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
-
+            itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
             option = itemView.findViewById(R.id.optionVarian);
-            jumlah = itemView.findViewById(R.id.cv);
+            btnMin = itemView.findViewById(R.id.btnMin);
+            btnPlus = itemView.findViewById(R.id.btnPlus);
+            tvJml = itemView.findViewById(R.id.tvJml);
+        }
+
+        @Override
+        public void onClick(View v) {
+            clickListener.onItemClick(getAdapterPosition(), v);
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            clickListener.onItemLongClick(getAdapterPosition(), v);
+            return false;
+        }
+    }
+
+    class CustomFilter extends Filter {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            FilterResults filterResults = new FilterResults();
+            if (constraint != null && constraint.length() > 0) {
+                constraint = constraint.toString();
+                Log.d(TAG, constraint.toString());
+                ArrayList<ModelBarang> filter = new ArrayList<>();
+                for (int i = 0; i < datasetFilter.size(); i++) {
+                    if (datasetFilter.get(i).getNama_kategori().contains(constraint) || datasetFilter.get(i).getNama_satuan().contains(constraint)) {
+                        ModelBarang m = datasetFilter.get(i);
+                        filter.add(m);
+                    }
+                }
+                filterResults.count = filter.size();
+                filterResults.values = filter;
+            } else {
+                filterResults.count = datasetFilter.size();
+                filterResults.values = datasetFilter;
+            }
+            return filterResults;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            dataset = (ArrayList<ModelBarang>) results.values;
+            notifyDataSetChanged();
         }
     }
 }

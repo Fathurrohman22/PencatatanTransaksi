@@ -22,6 +22,7 @@
             android:clickable="true"
             android:focusable="true"
             android:padding="8dp"
+            android:onClick="finish"
             android:src="@drawable/ic_close_black_24dp" />
 
         <ImageView
@@ -101,12 +102,14 @@
                         android:textSize="10sp" />
 
                     <EditText
-                        android:id="@+id/etFakturTransaksi"
+                        android:id="@+id/txtPelanggan"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingTop="8dp"
                         android:paddingBottom="8dp"
-                        android:inputType="number"
+                        android:inputType="textCapSentences"
+                        android:focusable="false"
+                        android:onClick="getPelanggan"
                         android:textColor="@color/colorBlack"
                         android:textSize="14sp" />
 
@@ -124,7 +127,9 @@
                         android:paddingTop="8dp"
                         android:paddingBottom="8dp"
                         android:inputType="date"
+                        android:focusable="false"
                         android:textColor="@color/colorBlack"
+                        android:onClick="getDate"
                         android:textSize="14sp" />
 
                     <TextView
@@ -180,6 +185,7 @@
                         android:layout_marginBottom="16dp"
                         android:textColor="@color/colorWhite"
                         android:id="@+id/tambah_barang"
+                        android:onClick="simpan"
                         android:backgroundTint="@color/colorPrimary"
                         android:text="Simpan"/>
 

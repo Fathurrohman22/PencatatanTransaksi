@@ -37,5 +37,5 @@ dependencies {
     implementation 'com.nineoldandroids:library:2.4.0'
     implementation 'com.android.volley:volley:1.1.1'
     implementation 'com.github.AnkitKiet:CounterView:1.4'
-
+    implementation 'com.amitshekhar.android:android-networking:1.0.2'
 }

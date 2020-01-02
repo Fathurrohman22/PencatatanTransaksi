@@ -65,8 +65,7 @@ public class MasterFragment extends Fragment implements BaseSliderView.OnSliderC
 
             //add your extra information
             textSliderView.bundle(new Bundle());
-            textSliderView.getBundle()
-                    .putString("extra", name);
+            textSliderView.getBundle().putString("extra", name);
 
             mSlider.addSlider(textSliderView);
         }
