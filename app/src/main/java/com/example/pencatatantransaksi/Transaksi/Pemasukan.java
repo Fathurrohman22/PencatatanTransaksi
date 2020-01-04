@@ -21,6 +21,7 @@ import com.androidnetworking.interfaces.StringRequestListener;
 import com.example.pencatatantransaksi.Contoller.API;
 import com.example.pencatatantransaksi.Helper.CariPelanggan.CariPelangganActivity;
 import com.example.pencatatantransaksi.Helper.CariPelanggan.PelangganModel;
+import com.example.pencatatantransaksi.Helper.Format;
 import com.example.pencatatantransaksi.R;
 import com.google.gson.Gson;
 
@@ -77,7 +78,7 @@ public class Pemasukan extends AppCompatActivity {
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year, monthOfYear, dayOfMonth);
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
+                SimpleDateFormat dateFormat = new SimpleDateFormat(Format.DATE, Locale.US);
                 tanggal = dateFormat.format(newDate.getTime());
                 txtDate.setText(tanggal);
                 getPemasukan();

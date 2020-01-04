@@ -16,12 +16,17 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.StringRequestListener;
 import com.example.pencatatantransaksi.Adapter.AdapterBarang;
 import com.example.pencatatantransaksi.Adapter.AdapterSpinnerKategori;
 import com.example.pencatatantransaksi.Adapter.AdapterSpinnerSatuan;
 import com.example.pencatatantransaksi.Adapter.AdapterSpinnerVarian;
 import com.example.pencatatantransaksi.Adapter.AdapterVarian;
 import com.example.pencatatantransaksi.Contoller.API;
+import com.example.pencatatantransaksi.Helper.Format;
 import com.example.pencatatantransaksi.Model.ModelBarang;
 import com.example.pencatatantransaksi.Model.ModelBarangMasuk;
 import com.example.pencatatantransaksi.Model.ModelKategori;
@@ -88,7 +93,7 @@ public class BarangMasuk extends AppCompatActivity {
         spinnerKategori = findViewById(R.id.my_spinnerKategori);
         spinnerSatuan = findViewById(R.id.my_spinnerSatuan);
         spinnerVarian = findViewById(R.id.my_spinnerBarang);
-//        dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
+//        dateFormat = new SimpleDateFormat(Format.DATE, Locale.US);
 //        tanggalbrgmasuk = findViewById(R.id.etTglBeli);
 //        tanggalbrgmasuk.setOnClickListener(new View.OnClickListener() {
 //            @Override

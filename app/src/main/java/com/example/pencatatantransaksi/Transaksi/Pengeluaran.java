@@ -18,6 +18,7 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.StringRequestListener;
+import com.example.pencatatantransaksi.Helper.Format;
 import com.example.pencatatantransaksi.R;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -88,7 +89,7 @@ public class Pengeluaran extends AppCompatActivity {
                  */
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year, monthOfYear, dayOfMonth);
-                dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
+                dateFormat = new SimpleDateFormat(Format.DATE, Locale.US);
 
                 /**
                  * Update TextView dengan tanggal yang kita pilih

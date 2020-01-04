@@ -38,6 +38,7 @@ import com.example.pencatatantransaksi.Adapter.AdapterVarian;
 import com.example.pencatatantransaksi.Contoller.API;
 import com.example.pencatatantransaksi.Helper.CariPelanggan.CariPelangganActivity;
 import com.example.pencatatantransaksi.Helper.CariPelanggan.PelangganModel;
+import com.example.pencatatantransaksi.Helper.Format;
 import com.example.pencatatantransaksi.Master.Barang;
 import com.example.pencatatantransaksi.Master.Stok;
 import com.example.pencatatantransaksi.Model.ModelBarang;
@@ -125,13 +126,13 @@ public class BarangKeluar extends AppCompatActivity {
         namapelanggan = findViewById(R.id.etNamaPel);
         rvVarian = findViewById(R.id.rvVarian);
         rvVarian.setLayoutManager(new LinearLayoutManager(this));
-        dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
+        dateFormat = new SimpleDateFormat(Format.DATE, Locale.US);
         tanggalbrgkeluar = findViewById(R.id.etTglJual);
         simpan = findViewById(R.id.tambah_barang);
         spinnerKategori = findViewById(R.id.my_spinnerKategori);
         spinnerSatuan = findViewById(R.id.my_spinnerSatuan);
         tvTotalHarga = findViewById(R.id.tvTotalHarga);
-
+        AndroidNetworking.initialize(getApplicationContext());
         namapelanggan.setFocusable(false);
         namapelanggan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -424,30 +425,36 @@ public class BarangKeluar extends AppCompatActivity {
         listBarangKeluar.clear();
         //`nama_pelanggan`, `tgl_barang_keluar`, `nama_kategori`, `nama_satuan`, `nama_varian`, `jumlah_brg_keluar`, `harga_total`
         final ProgressDialog progressDialog = ProgressDialog.show(this, "Harap Tunggu", "menyimpan data");
-        AndroidNetworking.post(API.URL_TAMBAH_BARANGKELUAR)
-                .addBodyParameter("nama_pelanggan", nama_pelanggan)
-                .addBodyParameter("tgl_barang_keluar", tanggalbrgkeluar)
-                .addBodyParameter("nama_kategori", kategori)
-                .addBodyParameter("nama_satuan", satuan)
-                .addBodyParameter("nama_varian", varian)
-                .addBodyParameter("jumlah_brg_keluar", jumlah)
-                .addBodyParameter("harga_total", harga_total)
-                .setPriority(Priority.MEDIUM)
-                .build()
-                .getAsString(new StringRequestListener() {
+        Log.i("CekData", nama_pelanggan + ", " + tanggalbrgkeluar + ", " + kategori + ", " + satuan + ", " + varian + ", " + jumlah + ", " + harga_total);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, API.URL_TAMBAH_BARANGKELUAR,
+                new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        progressDialog.cancel();
-                        Log.e("Response", response);
                         Toast.makeText(BarangKeluar.this, response, Toast.LENGTH_SHORT).show();
-                        finish();
                     }
-
+                },
+                new Response.ErrorListener() {
                     @Override
-                    public void onError(ANError anError) {
-                        progressDialog.cancel();
-                        Toast.makeText(BarangKeluar.this, "error", Toast.LENGTH_SHORT).show();
+                    public void onErrorResponse(VolleyError error) {
+
                     }
-                });
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("nama_pelanggan", nama_pelanggan);
+                params.put("tgl_barang_keluar", tanggalbrgkeluar);
+                params.put("nama_kategori", kategori);
+                params.put("nama_satuan", satuan);
+                params.put("nama_varian", "null");
+                params.put("jumlah_brg_keluar", jumlah);
+                params.put("harga_total",harga_total);
+                return params;
+
+            }};
+
+        //adding our stringrequest to queue
+        Volley.newRequestQueue(this).add(stringRequest);
     }
 }
